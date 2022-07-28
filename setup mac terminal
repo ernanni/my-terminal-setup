@@ -1,0 +1,94 @@
+# Setup Oh My Zsh!
+
+## 1. Install Homebrew
+
+### 1.2 Install command line tools for Xcode
+
+1. Open Terminal and type: 
+```
+xcode-select --install
+```
+2. Confirm screen
+
+Now that Xcode command line tools are installed we can proceed to the installation.
+
+1. Open Terminal and type: 
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+## 2. Install Zsh via Homebrew and Oh My Zsh
+
+1. To install Zsh type: 
+```
+brew install zsh
+```
+2. To install Oh My Zsh type: 
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+Check Zsh version typing: 
+```
+zsh --version
+```
+
+Now you can use the `~/.zshrc` to configure your options for the terminal.
+
+## 3. Configuring Oh My Zsh
+
+Clone the Spaceship repo: 
+```
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+```
+
+Create a symbolic link to Spaceship theme: 
+```
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+```
+
+Modify the variable `ZSH_THEME` on the `~/.zshrc` file
+
+```
+ZSH_THEME="spaceship"
+```
+
+### 3.1 Configuring Spaceship theme
+
+On the end of `~/.zshrc` file insert the following
+
+```
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  hg            # Mercurial section (hg_branch  + hg_status)
+  exec_time     # Execution time
+  line_sep      # Line break
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+SPACESHIP_USER_SHOW=always
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL="❯"
+SPACESHIP_CHAR_SUFFIX=" "
+```
+
+### 3.2 Install plugins via ZInit
+
+Type:
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zi/main/zi.zsh)"
+```
+
+After install, open the `~/.zshrc` file and at the end of `### End of ZInit's installer chunk` put the following:
+```
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+```
+
+That should be it. :)
